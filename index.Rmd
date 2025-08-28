@@ -1,5 +1,5 @@
 ---
-title: 'index'
+title: 'R'
 author: "Alanis S. Mulero Burgos"
 date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
 output: 
