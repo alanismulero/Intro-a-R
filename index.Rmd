@@ -1,14 +1,17 @@
 ---
-title: 'R'
+title: 'Introducción a R'
+subtitle: 'BIOL 4994/BIOL 4991'
 author: "Alanis S. Mulero Burgos"
 date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
 output: 
  prettydoc::html_pretty:
-   theme: cayman
+   theme: architect
    highlight: github
 ---
 
-```{r}
+```{r, echo = F}
 knitr::include_graphics("~/Downloads/Clase de R/IMG_3189.HEIC")
 ```
 
+## Sobre Mi
+Mi nombre es Alanis Sofía Mulero y estudio Microbiología Industrial. Me interesa seguir mis estudios tomando la Certificación de Tecnología Medica para luego realizar un PhD en Inmunología.  
