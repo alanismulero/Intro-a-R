@@ -12,4 +12,3 @@ output:
 knitr::include_graphics("~/Downloads/Clase de R/IMG_3189.HEIC")
 ```
 
-
