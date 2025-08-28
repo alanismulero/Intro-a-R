@@ -1,6 +1,6 @@
 ---
 title: 'R'
-author: "ALANIS S. MULERO BURGOS"
+author: "Alanis S. Mulero Burgos"
 date: "2025-08-26"
 output: html_document
 ---
