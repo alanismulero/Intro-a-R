@@ -1,2 +1,2 @@
-# Introducci-n-a-R
+# Introduccion-a-R
 Fall 2025-2026
