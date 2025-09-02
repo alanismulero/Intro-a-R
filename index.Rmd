@@ -15,3 +15,7 @@ knitr::include_graphics("~/Downloads/Clase de R/IMG_3189.HEIC")
 
 ## Sobre Mi
 Mi nombre es Alanis Sofía Mulero y estudio Microbiología Industrial. Me interesa seguir mis estudios tomando la Certificación de Tecnología Medica para luego realizar un PhD en Inmunología.  
+
+
+## R Tutorials
+#### Tarea 1
