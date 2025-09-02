@@ -19,11 +19,19 @@ knitr::include_graphics("~/Downloads/Clase de R/IMG_3189.HEIC")
 <div style="text-align: justify;">
 Mi nombre es Alanis Sofía Mulero Burgos y estoy cursando mi quinto año de Microbiología Industrial. Me interesa seguir mis estudios tomando la Certificación de Tecnología Medica para luego realizar un PhD en Inmunología.  
 </div>
+
+<br>
 <div style="text-align: center;">
 ```{r, echo = F}
 knitr::include_graphics("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGdjazcxMHJkcjRndnlsajhmOHRodmNxb3VxbWh0dWt0anB3NWUwMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/n8iVtgWrBghjO/giphy.gif")
 ```
 </div>
+<br>
 
 ### R Tutorials
 - [Tarea 1]()
+
+### Enlaces Importantes
+- [Github](https://github.com/alanismulero)
+- [LinkedIn](https://www.linkedin.com/in/alanis-mulero-38208b249/)
+- [Theme](http://jekyllthemes.org/themes/architect/)
