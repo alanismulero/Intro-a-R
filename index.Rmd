@@ -1,5 +1,5 @@
 ---
-title: 'Introducción a R'
+title: 'Portal de Tareas'
 subtitle: 'BIOL 4994/BIOL 4991'
 author: "Alanis S. Mulero Burgos"
 date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
@@ -9,13 +9,15 @@ output:
    highlight: github
 ---
 
-```{r, echo = F}
+<div style="text-align: center;">
+
+```{r, echo = F, out.width="70%"}
 knitr::include_graphics("~/Downloads/Clase de R/IMG_3189.HEIC")
 ```
-
+</div>
 ## Sobre Mi
-Mi nombre es Alanis Sofía Mulero y estudio Microbiología Industrial. Me interesa seguir mis estudios tomando la Certificación de Tecnología Medica para luego realizar un PhD en Inmunología.  
+Mi nombre es Alanis Sofía Mulero Burgos y estudio Microbiología Industrial. Me interesa seguir mis estudios tomando la Certificación de Tecnología Medica para luego realizar un PhD en Inmunología.  
 
 
-## R Tutorials
-- Tarea 1
+### R Tutorials
+- [Tarea 1]()
