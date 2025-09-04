@@ -30,7 +30,7 @@ knitr::include_graphics("https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExODh1a
 <br>
 
 ### R Tutorials
-- [Tarea 1]()
+- [Tarea 1](Intro a R/R Tutorials/R-_Tutorial1.html)
 <br>
 <br>
 <div style="text-align: center;">
