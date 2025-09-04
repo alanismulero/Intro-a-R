@@ -1,0 +1,15 @@
+---
+title: "Práctica 2"
+author: "ALANIS S. MULERO BURGOS"
+date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
+output: html_document
+---
+
+```{r}
+citation()
+```
+
+```{r}
+install.packages("ggplot2")
+```
+
