@@ -11,7 +11,7 @@ output:
 
 <div style="text-align: center;">
 
-```{r, echo = F, out.width="50%"}
+```{r, echo = F, out.width="30%"}
 knitr::include_graphics("~/Downloads/Clase de R/IMG_3189.HEIC")
 ```
 </div>
