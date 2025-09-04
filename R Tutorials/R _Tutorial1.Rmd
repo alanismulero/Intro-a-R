@@ -48,24 +48,34 @@ c
 ```
 
 ### Pregunta 6
+Verifica si 15 es mayor que 20
 
 ```{r}
-
+15>20
 ```
 
 ### Pregunta 7
+Verifica la clase del objeto "Hello World"
 
 ```{r}
-
+obj1 <- ('Hello World')
+class(obj1)
 ```
 
 ### Pregunta 8
+Run the following code chunk:
+- Observe the warnings that appear. (Observa las advertencias que aparecen.)
+- Modify the chunk options to suppress warnings without changing the code itself. (Modifica las opciones del chunk para apagar la advertencia sin cambiar el código.)
 
-```{r}
 
+```{r, warning=F}
+log(-1)
 ```
 
 ### Pregunta 9
+Run the following code chunk: - Observe the messages that appear. (Observa los mensajes que aparecen.)
+
+Modify the chunk options to suppress messages without changing the code itself. (Modifica las opciones del chunk para apagar mensajes sin cambiar el código.)
 
 ```{r}
 
