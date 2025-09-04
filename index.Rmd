@@ -11,7 +11,7 @@ output:
 
 <div style="text-align: center;">
 
-```{r, echo = F, out.width="10%"}
+```{r, echo = F, out.width="50%"}
 knitr::include_graphics("~/Downloads/Clase de R/IMG_3189.HEIC")
 ```
 </div>
@@ -22,7 +22,7 @@ Mi nombre es Alanis Sofía Mulero Burgos y estoy cursando mi quinto año de Micr
 
 <br>
 <div style="text-align: center;">
-```{r, echo = F, out.width="80%"}
+```{r, echo = F, out.width="50%"}
 knitr::include_graphics("https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExODh1aTkxbHM0d2NhMHY2cm5hcXJoNm56cTgwYmRlc2ZpY2cybmRidCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/F2ZzdaAFjdoVG/giphy.gif")
 ```
 
