@@ -58,3 +58,32 @@ alanis <- '22 años'
 alanis
 ```
 
+```{r}
+#No importa la dirrección de la flecha
+22 -> alanis
+22
+```
+
+```{r}
+abs(-5)
+sqrt(6)
+log(10)
+log10(0)
+exp(3)
+```
+
+```{r}
+#Crear variables
+var1 <- 67
+var1
+```
+
+```{r}
+x <- Sys.time()
+x
+```
+
+```{r}
+class(x)
+```
+

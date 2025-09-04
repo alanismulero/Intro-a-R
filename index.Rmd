@@ -17,7 +17,7 @@ knitr::include_graphics("~/Downloads/Clase de R/IMG_3189.HEIC")
 </div>
 ## Sobre Mi
 <div style="text-align: justify;">
-Mi nombre es Alanis Sofía Mulero Burgos y estoy cursando mi quinto año de Microbiología Industrial. A lo largo de mi carrera estudiantil he participado de los siguientes proyectos investigativo: Characterization of Microbial Factors Modulating Toxin Secretion and Antibacterial Metabolite Production in the Invasive Cane Toad (***Rhinella marina***) e Impact of Nicotine on Protein Dynamics in Human Cardiomyocytes Cells Exposed to SARS-CoV-2 Spike Variants. Gracias a estas experiencias investigativas me interesa seguir mis estudios tomando la Certificación de Tecnología Medica para luego realizar un PhD en Inmunología.  
+Mi nombre es Alanis Sofía Mulero Burgos y estoy cursando mi quinto año de Microbiología Industrial. A lo largo de mi carrera estudiantil he participado de los siguientes proyectos investigativo: Characterization of Microbial Factors Modulating Toxin Secretion and Antibacterial Metabolite Production in the Invasive Cane Toad (***Rhinella marina***) e Impact of Nicotine on Protein Dynamics in Human Cardiomyocytes Cells Exposed to SARS-CoV-2 Spike Variants. Gracias a estas experiencias investigativas me interesa seguir mis estudios tomando la Certificación de Tecnología Médica para luego realizar un PhD en Inmunología.  
 </div>
 
 <br>
@@ -39,6 +39,7 @@ knitr::include_graphics("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGdja
 ```
 </div>
 <br>
+
 ### Enlaces Importantes
 - [Github](https://github.com/alanismulero)
 - [LinkedIn](https://www.linkedin.com/in/alanis-mulero-38208b249/)
