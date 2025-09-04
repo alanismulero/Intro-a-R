@@ -13,6 +13,7 @@ Crea un objeto llamado height con el valor 175
 
 ```{r}
 Altura <- 175
+Altura
 ```
 
 ### Pregunta 2
