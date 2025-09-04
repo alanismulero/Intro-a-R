@@ -64,9 +64,9 @@ class(obj1)
 ```
 
 ### Pregunta 8
-Run the following code chunk:
-- Observe the warnings that appear. (Observa las advertencias que aparecen.)
-- Modify the chunk options to suppress warnings without changing the code itself. (Modifica las opciones del chunk para apagar la advertencia sin cambiar el código.)
+Run the following code chunk:<br>
+- Observa las advertencias que aparecen.)<br>
+- Modifica las opciones del chunk para apagar la advertencia sin cambiar el código
 
 
 ```{r, warning=F}
@@ -74,18 +74,24 @@ log(-1)
 ```
 
 ### Pregunta 9
-Run the following code chunk: - Observe the messages that appear. (Observa los mensajes que aparecen.)
+Observa los mensajes que aparecen
 
-Modify the chunk options to suppress messages without changing the code itself. (Modifica las opciones del chunk para apagar mensajes sin cambiar el código.)
+Modifica las opciones del chunk para apagar mensajes sin cambiar el código
 
 ```{r, message=F}
 library(dplyr)
 ```
 
 ### Pregunta 10
-Use R’s help system to find out what the function mean() does. (Usa el sistema de ayuda de R para averiguar qué hace la función mean().)
+Usa el sistema de ayuda de R para averiguar qué hace la función mean()
 
 ```{r}
 ?mean
+```
+
+### Pregunta 11
+Suma 5+10
+```{r}
+5+10
 ```
 
