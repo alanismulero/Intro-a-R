@@ -40,5 +40,21 @@ citation('dplyr')
 "Hello" == "Goodbye"
 ```
 
+```{r}
+#Desigualdades
+'Hello' != 'Goodbye'
+```
 
+```{r}
+#Mayor o menor
+5>6
+7>9
+```
+
+```{r}
+#Asignar objetos
+alanis <- '22 años'
+#Llamar el objeto
+alanis
+```
 
