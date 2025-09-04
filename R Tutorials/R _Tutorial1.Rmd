@@ -77,13 +77,14 @@ Run the following code chunk: - Observe the messages that appear. (Observa los m
 
 Modify the chunk options to suppress messages without changing the code itself. (Modifica las opciones del chunk para apagar mensajes sin cambiar el código.)
 
-```{r}
-
+```{r, message=F}
+library(dplyr)
 ```
 
 ### Pregunta 10
+Use R’s help system to find out what the function mean() does. (Usa el sistema de ayuda de R para averiguar qué hace la función mean().)
 
 ```{r}
-
+?mean
 ```
 
