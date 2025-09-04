@@ -9,33 +9,42 @@ output:
 ---
 
 ### Pregunta 1 
+Crea un objeto llamado height con el valor 175
 
 ```{r}
 Altura <- 175
 ```
 
 ### Pregunta 2
+Calcula el resultado de 25 * 4 - 10
 
 ```{r}
-
+25*4-10
 ```
 
 ### Pregunta 3
+Usa la función sqrt() para calcular la raíz cuadrada de 81
 
 ```{r}
-
+sqrt(81)
 ```
 
 ### Pregunta 4
+Asigna la frase “R is fun!” a un objeto llamado message
 
 ```{r}
-
+message <- "R is fun"
+message
 ```
 
 ### Pregunta 5
+Crea dos objetos a <- 10 y b <- 5. Calcula su suma y guárdala en c.
 
 ```{r}
-
+a <- 10
+b <- 5
+c <- (a+b)
+c
 ```
 
 ### Pregunta 6
