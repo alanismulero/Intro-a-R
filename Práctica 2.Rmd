@@ -11,10 +11,34 @@ citation()
 
 
 ```{r}
-install.packages("ggplot2")
-install.packages("dplyr")
-
-library("ggplot2")
-library("dplyr")
+#install.packages("ggplot2")
+#install.packages("dplyr")
 ```
+
+```{r, message = F, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+```
+
+```{r}
+citation('dplyr')
+```
+
+
+
+```{r}
+#Pedir ayuda a R 
+#?lm
+#??ggplot2
+
+#Asignar 
+#<- 
+```
+
+```{r}
+#Igualdades
+"Hello" == "Goodbye"
+```
+
+
 

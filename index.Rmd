@@ -32,6 +32,7 @@ knitr::include_graphics("https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExODh1a
 ### R Tutorials
 - [Tarea 1]()
 <br>
+<br>
 <div style="text-align: center;">
 ```{r, echo = F}
 knitr::include_graphics("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGdjazcxMHJkcjRndnlsajhmOHRodmNxb3VxbWh0dWt0anB3NWUwMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/n8iVtgWrBghjO/giphy.gif")
