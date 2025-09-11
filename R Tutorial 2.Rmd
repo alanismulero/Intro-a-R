@@ -1,5 +1,5 @@
 ---
-title: "R_Tutorial2"
+title: "R Tutorial 2"
 author: "Alanis S. Mulero Burgos"
 date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
 output:
@@ -7,4 +7,40 @@ output:
    theme: architect
    highlight: github
 ---
+## Instrucciones
 
+- Esta tarea consta de 10 preguntas, cada una vale 10 puntos.
+- Escribe tus respuestas en chunks de R cuando sea aplicable.
+- Asegúrate de que tu código se ejecute sin errores. Incluye comentarios si es necesario.
+- Para preguntas sobre opciones de chunks, experimenta con ellas y escribe tus observaciones.
+- Entrega la tarea en tus páginas personales usando el archivo HTML generado/kniteado desde el .Rmd. No copies capturas de pantalla del resultado a menos que se indique.
+
+### Pregunta 1
+Convierte el conjunto de datos BOD (predefinido en R) a una lista e imprime la lista.
+
+### Pregunta 2
+Convierte el siguiente data frame en un data frame e imprime la matriz.
+
+
+### Pregunta 3
+Crea un subconjunto del df de la Q2 que incluya únicamente la primera y segunda fila. Imprime el subconjunto.
+
+### Pregunta 4
+Crea un subconjunto del df de la Q2 que incluya únicamente la primera y segunda columna. Imprime el subconjunto.
+
+### Pregunta 5
+Ordena el df de la Q2 por la columna Age en orden ascendente. Imprime el data frame ordenado.
+
+### Pregunta 6
+
+
+### Pregunta 7
+
+
+### Pregunta 8
+
+
+### Pregunta 9
+
+
+### Pregunta 10
