@@ -30,6 +30,97 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </script>
 
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+
+a.sourceLine {
+pointer-events: auto;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -59,7 +150,7 @@ code span.ot { color: #007020; }
 <div class="inner">
 <h1 class="title toc-ignore">R Tutorial 2</h1>
 <h3 class="author">Alanis S. Mulero Burgos</h3>
-<h3 class="date">2025-Sep-11, 05:30 PM</h3>
+<h3 class="date">2025-Sep-14, 04:38 PM</h3>
 </div>
 </header>
 
@@ -85,41 +176,307 @@ resultado a menos que se indique.</li>
 <h3>Pregunta 1</h3>
 <p>Convierte el conjunto de datos BOD (predefinido en R) a una lista e
 imprime la lista.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>BOD_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(BOD)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>BOD_df</span></code></pre></div>
+<pre><code>##   Time demand
+## 1    1    8.3
+## 2    2   10.3
+## 3    3   19.0
+## 4    4   16.0
+## 5    5   15.6
+## 6    7   19.8</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>list_from_df <span class="ot">&lt;-</span> <span class="fu">as.list</span>(BOD_df)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>list_from_df</span></code></pre></div>
+<pre><code>## $Time
+## [1] 1 2 3 4 5 7
+## 
+## $demand
+## [1]  8.3 10.3 19.0 16.0 15.6 19.8
+## 
+## attr(,&quot;reference&quot;)
+## [1] &quot;A1.4, p. 270&quot;</code></pre>
 </div>
 <div id="pregunta-2" class="section level3">
 <h3>Pregunta 2</h3>
-<p>Convierte el siguiente data frame en un data frame e imprime la
+<p>Convierte el siguiente data frame en una matriz e imprime la
 matriz.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>df1<span class="ot">=</span><span class="fu">data.frame</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="st">&quot;Name&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;d&quot;</span>),</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="st">&quot;Age&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">34</span>,<span class="dv">23</span>,<span class="dv">67</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="st">&quot;BMI&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="dv">22</span>,<span class="dv">12</span>,<span class="dv">10</span>,<span class="dv">11</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="st">&quot;Country&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Malaysia&quot;</span>,<span class="st">&quot;India&quot;</span>,<span class="st">&quot;Spain&quot;</span>,<span class="st">&quot;England&quot;</span>))</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="fu">print</span>(df1)</span></code></pre></div>
+<pre><code>##   Name Age BMI  Country
+## 1    a  12  22 Malaysia
+## 2    b  34  12    India
+## 3    c  23  10    Spain
+## 4    d  67  11  England</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>matrix_from_df <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(df1)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>matrix_from_df</span></code></pre></div>
+<pre><code>##      Name Age  BMI  Country   
+## [1,] &quot;a&quot;  &quot;12&quot; &quot;22&quot; &quot;Malaysia&quot;
+## [2,] &quot;b&quot;  &quot;34&quot; &quot;12&quot; &quot;India&quot;   
+## [3,] &quot;c&quot;  &quot;23&quot; &quot;10&quot; &quot;Spain&quot;   
+## [4,] &quot;d&quot;  &quot;67&quot; &quot;11&quot; &quot;England&quot;</code></pre>
 </div>
 <div id="pregunta-3" class="section level3">
 <h3>Pregunta 3</h3>
 <p>Crea un subconjunto del df de la Q2 que incluya únicamente la primera
 y segunda fila. Imprime el subconjunto.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>df<span class="ot">=</span><span class="fu">data.frame</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  <span class="at">A=</span><span class="fu">c</span>(<span class="st">&quot;Raju&quot;</span>,<span class="st">&quot;Kumar&quot;</span>,<span class="st">&quot;Chandru&quot;</span>,<span class="st">&quot;Deepak&quot;</span>,<span class="st">&quot;Raina&quot;</span>, <span class="st">&quot;Dhoni&quot;</span>, <span class="st">&quot;Hema&quot;</span>, <span class="st">&quot;Vandana&quot;</span>, <span class="st">&quot;Bela&quot;</span>,<span class="st">&quot;Anand&quot;</span> ),</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="at">B=</span><span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">34</span>,<span class="dv">23</span>,<span class="dv">67</span>,<span class="dv">23</span>,<span class="dv">43</span>,<span class="dv">23</span>,<span class="dv">38</span>,<span class="dv">34</span>,<span class="dv">12</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="at">C=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;M&quot;</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  <span class="at">D=</span><span class="fu">c</span>(<span class="st">&quot;Malaysia&quot;</span>,<span class="st">&quot;India&quot;</span>,<span class="st">&quot;Spain&quot;</span>,<span class="st">&quot;England&quot;</span>, <span class="st">&quot;Malaysia&quot;</span>, <span class="st">&quot;Malaysia&quot;</span>, <span class="st">&quot;India&quot;</span>, <span class="st">&quot;Egypt&quot;</span>, <span class="st">&quot;Italy&quot;</span>, <span class="st">&quot;Peru&quot;</span>))</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="fu">names</span>(df)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Name&quot;</span>, <span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;Country&quot;</span> )</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>##       Name Age Gender  Country
+## 1     Raju  12      M Malaysia
+## 2    Kumar  34      M    India
+## 3  Chandru  23      M    Spain
+## 4   Deepak  67      M  England
+## 5    Raina  23      M Malaysia
+## 6    Dhoni  43      M Malaysia
+## 7     Hema  23      F    India
+## 8  Vandana  38      F    Egypt
+## 9     Bela  34      F    Italy
+## 10   Anand  12      M     Peru</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>subset_df <span class="ot">&lt;-</span> df[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>subset_df</span></code></pre></div>
+<pre><code>##    Name Age Gender  Country
+## 1  Raju  12      M Malaysia
+## 2 Kumar  34      M    India</code></pre>
 </div>
 <div id="pregunta-4" class="section level3">
 <h3>Pregunta 4</h3>
 <p>Crea un subconjunto del df de la Q2 que incluya únicamente la primera
 y segunda columna. Imprime el subconjunto.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>df<span class="ot">=</span><span class="fu">data.frame</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>  <span class="at">A=</span><span class="fu">c</span>(<span class="st">&quot;Raju&quot;</span>,<span class="st">&quot;Kumar&quot;</span>,<span class="st">&quot;Chandru&quot;</span>,<span class="st">&quot;Deepak&quot;</span>,<span class="st">&quot;Raina&quot;</span>, <span class="st">&quot;Dhoni&quot;</span>, <span class="st">&quot;Hema&quot;</span>, <span class="st">&quot;Vandana&quot;</span>, <span class="st">&quot;Bela&quot;</span>,<span class="st">&quot;Anand&quot;</span> ),</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>  <span class="at">B=</span><span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">34</span>,<span class="dv">23</span>,<span class="dv">67</span>,<span class="dv">23</span>,<span class="dv">43</span>,<span class="dv">23</span>,<span class="dv">38</span>,<span class="dv">34</span>,<span class="dv">12</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  <span class="at">C=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;M&quot;</span>),</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  <span class="at">D=</span><span class="fu">c</span>(<span class="st">&quot;Malaysia&quot;</span>,<span class="st">&quot;India&quot;</span>,<span class="st">&quot;Spain&quot;</span>,<span class="st">&quot;England&quot;</span>, <span class="st">&quot;Malaysia&quot;</span>, <span class="st">&quot;Malaysia&quot;</span>, <span class="st">&quot;India&quot;</span>, <span class="st">&quot;Egypt&quot;</span>, <span class="st">&quot;Italy&quot;</span>, <span class="st">&quot;Peru&quot;</span>))</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="fu">names</span>(df)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Name&quot;</span>, <span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;Country&quot;</span> )</span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>##       Name Age Gender  Country
+## 1     Raju  12      M Malaysia
+## 2    Kumar  34      M    India
+## 3  Chandru  23      M    Spain
+## 4   Deepak  67      M  England
+## 5    Raina  23      M Malaysia
+## 6    Dhoni  43      M Malaysia
+## 7     Hema  23      F    India
+## 8  Vandana  38      F    Egypt
+## 9     Bela  34      F    Italy
+## 10   Anand  12      M     Peru</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>subset_df <span class="ot">&lt;-</span> df[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>subset_df</span></code></pre></div>
+<pre><code>##       Name Age
+## 1     Raju  12
+## 2    Kumar  34
+## 3  Chandru  23
+## 4   Deepak  67
+## 5    Raina  23
+## 6    Dhoni  43
+## 7     Hema  23
+## 8  Vandana  38
+## 9     Bela  34
+## 10   Anand  12</code></pre>
 </div>
 <div id="pregunta-5" class="section level3">
 <h3>Pregunta 5</h3>
 <p>Ordena el df de la Q2 por la columna Age en orden ascendente. Imprime
 el data frame ordenado.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>df<span class="ot">=</span><span class="fu">data.frame</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>  <span class="at">A=</span><span class="fu">c</span>(<span class="st">&quot;Raju&quot;</span>,<span class="st">&quot;Kumar&quot;</span>,<span class="st">&quot;Chandru&quot;</span>,<span class="st">&quot;Deepak&quot;</span>,<span class="st">&quot;Raina&quot;</span>, <span class="st">&quot;Dhoni&quot;</span>, <span class="st">&quot;Hema&quot;</span>, <span class="st">&quot;Vandana&quot;</span>, <span class="st">&quot;Bela&quot;</span>,<span class="st">&quot;Anand&quot;</span> ),</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>  <span class="at">B=</span><span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">34</span>,<span class="dv">23</span>,<span class="dv">67</span>,<span class="dv">23</span>,<span class="dv">43</span>,<span class="dv">23</span>,<span class="dv">38</span>,<span class="dv">34</span>,<span class="dv">12</span>),</span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>  <span class="at">C=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;M&quot;</span>),</span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>  <span class="at">D=</span><span class="fu">c</span>(<span class="st">&quot;Malaysia&quot;</span>,<span class="st">&quot;India&quot;</span>,<span class="st">&quot;Spain&quot;</span>,<span class="st">&quot;England&quot;</span>, <span class="st">&quot;Malaysia&quot;</span>, <span class="st">&quot;Malaysia&quot;</span>, <span class="st">&quot;India&quot;</span>, <span class="st">&quot;Egypt&quot;</span>, <span class="st">&quot;Italy&quot;</span>, <span class="st">&quot;Peru&quot;</span>))</span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="fu">names</span>(df)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Name&quot;</span>, <span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;Country&quot;</span> )</span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>##       Name Age Gender  Country
+## 1     Raju  12      M Malaysia
+## 2    Kumar  34      M    India
+## 3  Chandru  23      M    Spain
+## 4   Deepak  67      M  England
+## 5    Raina  23      M Malaysia
+## 6    Dhoni  43      M Malaysia
+## 7     Hema  23      F    India
+## 8  Vandana  38      F    Egypt
+## 9     Bela  34      F    Italy
+## 10   Anand  12      M     Peru</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>df[<span class="fu">order</span>(<span class="sc">-</span>df<span class="sc">$</span>Age), ]</span></code></pre></div>
+<pre><code>##       Name Age Gender  Country
+## 4   Deepak  67      M  England
+## 6    Dhoni  43      M Malaysia
+## 8  Vandana  38      F    Egypt
+## 2    Kumar  34      M    India
+## 9     Bela  34      F    Italy
+## 3  Chandru  23      M    Spain
+## 5    Raina  23      M Malaysia
+## 7     Hema  23      F    India
+## 1     Raju  12      M Malaysia
+## 10   Anand  12      M     Peru</code></pre>
 </div>
 <div id="pregunta-6" class="section level3">
 <h3>Pregunta 6</h3>
+<p>Agrega una nueva columna llamada Score al df de la Q2 con los
+siguientes valores: 85, 90, 78, 88, 90, 92, 80, 90, 87, 100. Imprime el
+data frame actualizado.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>df<span class="ot">=</span><span class="fu">data.frame</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>  <span class="at">A=</span><span class="fu">c</span>(<span class="st">&quot;Raju&quot;</span>,<span class="st">&quot;Kumar&quot;</span>,<span class="st">&quot;Chandru&quot;</span>,<span class="st">&quot;Deepak&quot;</span>,<span class="st">&quot;Raina&quot;</span>, <span class="st">&quot;Dhoni&quot;</span>, <span class="st">&quot;Hema&quot;</span>, <span class="st">&quot;Vandana&quot;</span>, <span class="st">&quot;Bela&quot;</span>,<span class="st">&quot;Anand&quot;</span> ),</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>  <span class="at">B=</span><span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">34</span>,<span class="dv">23</span>,<span class="dv">67</span>,<span class="dv">23</span>,<span class="dv">43</span>,<span class="dv">23</span>,<span class="dv">38</span>,<span class="dv">34</span>,<span class="dv">12</span>),</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>  <span class="at">C=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;M&quot;</span>),</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>  <span class="at">D=</span><span class="fu">c</span>(<span class="st">&quot;Malaysia&quot;</span>,<span class="st">&quot;India&quot;</span>,<span class="st">&quot;Spain&quot;</span>,<span class="st">&quot;England&quot;</span>, <span class="st">&quot;Malaysia&quot;</span>, <span class="st">&quot;Malaysia&quot;</span>, <span class="st">&quot;India&quot;</span>, <span class="st">&quot;Egypt&quot;</span>, <span class="st">&quot;Italy&quot;</span>, <span class="st">&quot;Peru&quot;</span>))</span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="fu">names</span>(df)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Name&quot;</span>, <span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;Country&quot;</span> )</span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>##       Name Age Gender  Country
+## 1     Raju  12      M Malaysia
+## 2    Kumar  34      M    India
+## 3  Chandru  23      M    Spain
+## 4   Deepak  67      M  England
+## 5    Raina  23      M Malaysia
+## 6    Dhoni  43      M Malaysia
+## 7     Hema  23      F    India
+## 8  Vandana  38      F    Egypt
+## 9     Bela  34      F    Italy
+## 10   Anand  12      M     Peru</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>df<span class="sc">$</span>Score <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">85</span>, <span class="dv">90</span>, <span class="dv">78</span>, <span class="dv">88</span>, <span class="dv">90</span>, <span class="dv">92</span>, <span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">87</span>, <span class="dv">100</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>df</span></code></pre></div>
+<pre><code>##       Name Age Gender  Country Score
+## 1     Raju  12      M Malaysia    85
+## 2    Kumar  34      M    India    90
+## 3  Chandru  23      M    Spain    78
+## 4   Deepak  67      M  England    88
+## 5    Raina  23      M Malaysia    90
+## 6    Dhoni  43      M Malaysia    92
+## 7     Hema  23      F    India    80
+## 8  Vandana  38      F    Egypt    90
+## 9     Bela  34      F    Italy    87
+## 10   Anand  12      M     Peru   100</code></pre>
 </div>
 <div id="pregunta-7" class="section level3">
 <h3>Pregunta 7</h3>
+<p>Del df de la Q2, crea un subconjunto donde Age sea mayor a 30.
+Imprime el subconjunto.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>df<span class="ot">=</span><span class="fu">data.frame</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>  <span class="at">A=</span><span class="fu">c</span>(<span class="st">&quot;Raju&quot;</span>,<span class="st">&quot;Kumar&quot;</span>,<span class="st">&quot;Chandru&quot;</span>,<span class="st">&quot;Deepak&quot;</span>,<span class="st">&quot;Raina&quot;</span>, <span class="st">&quot;Dhoni&quot;</span>, <span class="st">&quot;Hema&quot;</span>, <span class="st">&quot;Vandana&quot;</span>, <span class="st">&quot;Bela&quot;</span>,<span class="st">&quot;Anand&quot;</span> ),</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>  <span class="at">B=</span><span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">34</span>,<span class="dv">23</span>,<span class="dv">67</span>,<span class="dv">23</span>,<span class="dv">43</span>,<span class="dv">23</span>,<span class="dv">38</span>,<span class="dv">34</span>,<span class="dv">12</span>),</span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>  <span class="at">C=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;M&quot;</span>),</span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>  <span class="at">D=</span><span class="fu">c</span>(<span class="st">&quot;Malaysia&quot;</span>,<span class="st">&quot;India&quot;</span>,<span class="st">&quot;Spain&quot;</span>,<span class="st">&quot;England&quot;</span>, <span class="st">&quot;Malaysia&quot;</span>, <span class="st">&quot;Malaysia&quot;</span>, <span class="st">&quot;India&quot;</span>, <span class="st">&quot;Egypt&quot;</span>, <span class="st">&quot;Italy&quot;</span>, <span class="st">&quot;Peru&quot;</span>))</span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="fu">names</span>(df)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Name&quot;</span>, <span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;Country&quot;</span> )</span>
+<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>##       Name Age Gender  Country
+## 1     Raju  12      M Malaysia
+## 2    Kumar  34      M    India
+## 3  Chandru  23      M    Spain
+## 4   Deepak  67      M  England
+## 5    Raina  23      M Malaysia
+## 6    Dhoni  43      M Malaysia
+## 7     Hema  23      F    India
+## 8  Vandana  38      F    Egypt
+## 9     Bela  34      F    Italy
+## 10   Anand  12      M     Peru</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>subset_df <span class="ot">&lt;-</span> df[df<span class="sc">$</span>Age <span class="sc">&gt;</span> <span class="dv">30</span>, ]</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>subset_df</span></code></pre></div>
+<pre><code>##      Name Age Gender  Country
+## 2   Kumar  34      M    India
+## 4  Deepak  67      M  England
+## 6   Dhoni  43      M Malaysia
+## 8 Vandana  38      F    Egypt
+## 9    Bela  34      F    Italy</code></pre>
 </div>
 <div id="pregunta-8" class="section level3">
 <h3>Pregunta 8</h3>
+<p>Renombra las columnas del df de la Q2 como Person, Years, Index y
+Nation. Imprime el data frame actualizado.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>df<span class="ot">=</span><span class="fu">data.frame</span>(</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>  <span class="at">A=</span><span class="fu">c</span>(<span class="st">&quot;Raju&quot;</span>,<span class="st">&quot;Kumar&quot;</span>,<span class="st">&quot;Chandru&quot;</span>,<span class="st">&quot;Deepak&quot;</span>,<span class="st">&quot;Raina&quot;</span>, <span class="st">&quot;Dhoni&quot;</span>, <span class="st">&quot;Hema&quot;</span>, <span class="st">&quot;Vandana&quot;</span>, <span class="st">&quot;Bela&quot;</span>,<span class="st">&quot;Anand&quot;</span> ),</span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>  <span class="at">B=</span><span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">34</span>,<span class="dv">23</span>,<span class="dv">67</span>,<span class="dv">23</span>,<span class="dv">43</span>,<span class="dv">23</span>,<span class="dv">38</span>,<span class="dv">34</span>,<span class="dv">12</span>),</span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a>  <span class="at">C=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;M&quot;</span>),</span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>  <span class="at">D=</span><span class="fu">c</span>(<span class="st">&quot;Malaysia&quot;</span>,<span class="st">&quot;India&quot;</span>,<span class="st">&quot;Spain&quot;</span>,<span class="st">&quot;England&quot;</span>, <span class="st">&quot;Malaysia&quot;</span>, <span class="st">&quot;Malaysia&quot;</span>, <span class="st">&quot;India&quot;</span>, <span class="st">&quot;Egypt&quot;</span>, <span class="st">&quot;Italy&quot;</span>, <span class="st">&quot;Peru&quot;</span>))</span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a><span class="fu">names</span>(df)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Name&quot;</span>, <span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;Country&quot;</span> )</span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>##       Name Age Gender  Country
+## 1     Raju  12      M Malaysia
+## 2    Kumar  34      M    India
+## 3  Chandru  23      M    Spain
+## 4   Deepak  67      M  England
+## 5    Raina  23      M Malaysia
+## 6    Dhoni  43      M Malaysia
+## 7     Hema  23      F    India
+## 8  Vandana  38      F    Egypt
+## 9     Bela  34      F    Italy
+## 10   Anand  12      M     Peru</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="fu">colnames</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Person&#39;</span>, <span class="st">&#39;Years&#39;</span>, <span class="st">&#39;Index&#39;</span>, <span class="st">&#39;Nation&#39;</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>df</span></code></pre></div>
+<pre><code>##     Person Years Index   Nation
+## 1     Raju    12     M Malaysia
+## 2    Kumar    34     M    India
+## 3  Chandru    23     M    Spain
+## 4   Deepak    67     M  England
+## 5    Raina    23     M Malaysia
+## 6    Dhoni    43     M Malaysia
+## 7     Hema    23     F    India
+## 8  Vandana    38     F    Egypt
+## 9     Bela    34     F    Italy
+## 10   Anand    12     M     Peru</code></pre>
 </div>
 <div id="pregunta-9" class="section level3">
 <h3>Pregunta 9</h3>
+<p>Del df de la Q2, selecciona las filas donde Age sea mayor a 20 y BMI
+menor a 15. Imprime el subconjunto.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>df<span class="ot">=</span><span class="fu">data.frame</span>(</span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>  <span class="at">A=</span><span class="fu">c</span>(<span class="st">&quot;Raju&quot;</span>,<span class="st">&quot;Kumar&quot;</span>,<span class="st">&quot;Chandru&quot;</span>,<span class="st">&quot;Deepak&quot;</span>,<span class="st">&quot;Raina&quot;</span>, <span class="st">&quot;Dhoni&quot;</span>, <span class="st">&quot;Hema&quot;</span>, <span class="st">&quot;Vandana&quot;</span>, <span class="st">&quot;Bela&quot;</span>,<span class="st">&quot;Anand&quot;</span> ),</span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a>  <span class="at">B=</span><span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">34</span>,<span class="dv">23</span>,<span class="dv">67</span>,<span class="dv">23</span>,<span class="dv">43</span>,<span class="dv">23</span>,<span class="dv">38</span>,<span class="dv">34</span>,<span class="dv">12</span>),</span>
+<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a>  <span class="at">C=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;M&quot;</span>),</span>
+<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a>  <span class="at">D=</span><span class="fu">c</span>(<span class="st">&quot;Malaysia&quot;</span>,<span class="st">&quot;India&quot;</span>,<span class="st">&quot;Spain&quot;</span>,<span class="st">&quot;England&quot;</span>, <span class="st">&quot;Malaysia&quot;</span>, <span class="st">&quot;Malaysia&quot;</span>, <span class="st">&quot;India&quot;</span>, <span class="st">&quot;Egypt&quot;</span>, <span class="st">&quot;Italy&quot;</span>, <span class="st">&quot;Peru&quot;</span>))</span>
+<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a><span class="fu">names</span>(df)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Name&quot;</span>, <span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;Country&quot;</span> )</span>
+<span id="cb33-8"><a href="#cb33-8" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>##       Name Age Gender  Country
+## 1     Raju  12      M Malaysia
+## 2    Kumar  34      M    India
+## 3  Chandru  23      M    Spain
+## 4   Deepak  67      M  England
+## 5    Raina  23      M Malaysia
+## 6    Dhoni  43      M Malaysia
+## 7     Hema  23      F    India
+## 8  Vandana  38      F    Egypt
+## 9     Bela  34      F    Italy
+## 10   Anand  12      M     Peru</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>df<span class="sc">$</span>BMI <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">10</span>, <span class="dv">9</span>, <span class="dv">39</span>, <span class="dv">26</span>, <span class="dv">14</span>, <span class="dv">21</span>, <span class="dv">12</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>df</span></code></pre></div>
+<pre><code>##       Name Age Gender  Country BMI
+## 1     Raju  12      M Malaysia  15
+## 2    Kumar  34      M    India  20
+## 3  Chandru  23      M    Spain  30
+## 4   Deepak  67      M  England  10
+## 5    Raina  23      M Malaysia   9
+## 6    Dhoni  43      M Malaysia  39
+## 7     Hema  23      F    India  26
+## 8  Vandana  38      F    Egypt  14
+## 9     Bela  34      F    Italy  21
+## 10   Anand  12      M     Peru  12</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>subconjunto <span class="ot">&lt;-</span> <span class="fu">subset</span>(df, Age <span class="sc">&gt;</span> <span class="dv">20</span> <span class="sc">&amp;</span> BMI <span class="sc">&lt;</span> <span class="dv">15</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a><span class="fu">print</span>(subconjunto)</span></code></pre></div>
+<pre><code>##      Name Age Gender  Country BMI
+## 4  Deepak  67      M  England  10
+## 5   Raina  23      M Malaysia   9
+## 8 Vandana  38      F    Egypt  14</code></pre>
 </div>
 <div id="pregunta-10" class="section level3">
 <h3>Pregunta 10</h3>
+<p>Calcula la media de la columna Age del df de la Q2. Imprime el
+resultado.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>Age)</span></code></pre></div>
+<pre><code>## [1] 30.9</code></pre>
 </div>
 </div>
     </section>
