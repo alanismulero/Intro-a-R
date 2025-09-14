@@ -31,7 +31,7 @@ knitr::include_graphics("https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExODh1a
 
 ### R Tutorials
 - [Tarea 1](R Tutorials/R-_Tutorial1.html)
-- [Tarea 2]()
+- [Tarea 2](R Tutorials/R-Tutorial-2.html)
 <br>
 <br>
 <div style="text-align: center;">
