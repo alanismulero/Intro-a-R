@@ -83,7 +83,7 @@ subset_df <- df[df$Age > 250, ]
 print(subset_df)
 
 
-subset(df, Age > 100 & Weights < 200)
+subset(df, "Age" > 100 & "Weights" < 200)
 
 df1 <- df[, c("Name", "Age")]
 df1
@@ -127,3 +127,42 @@ df2 <- data.frame(
 df2
 merged_df <- merge(df, df2, by = 'Characters')
 merged_df
+
+# Real World Example ------------------------------------------------------
+codon_usage <- read.csv("codon_usage.csv")
+head(codon_usage)
+
+str(codon_usage) # structure of the data frame
+
+# Subset solo virus -------------------------------------------------------
+
+viral <- codon_usage[codon_usage$Kingdom == "vrl", ]
+viral
+head(viral,3)
+
+# Subset solo virus y bacteria --------------------------------------------
+
+viral_bacteria <- codon_usage[codon_usage$Kingdom %in% c("vrl", "bct"), ]
+viral_bacteria
+
+# Converting Between Data Structures --------------------------------------
+# List → Data Frame
+df_from_list <- as.data.frame(list(a = 1:3, b = 4:6))
+df_from_list
+# Data Frame → List
+list_from_df <- as.list(df_from_list)
+list_from_df
+# Matrix → Data Frame
+m <- matrix(1:6, ncol = 2)
+m
+df_from_matrix <- as.data.frame(m)
+df_from_matrix
+# Data Frame → Matrix
+matrix_from_df <- as.matrix(df_from_list)
+matrix_from_df
+# List → Matrix
+matrix_from_list <- as.matrix(list(c(1,2,3), c(4,5,6)))
+matrix_from_list
+# Matrix → List
+list_from_matrix <- as.list(m)
+list_from_matrix
