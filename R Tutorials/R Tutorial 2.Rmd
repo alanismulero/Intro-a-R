@@ -148,19 +148,15 @@ df
 Del df de la Q2, selecciona las filas donde Age sea mayor a 20 y BMI menor a 15. Imprime el subconjunto.
 
 ```{r}
-df=data.frame(
-  A=c("Raju","Kumar","Chandru","Deepak","Raina", "Dhoni", "Hema", "Vandana", "Bela","Anand" ),
-  B=c(12,34,23,67,23,43,23,38,34,12),
-  C=c("M","M","M","M","M","M","F","F","F","M"),
-  D=c("Malaysia","India","Spain","England", "Malaysia", "Malaysia", "India", "Egypt", "Italy", "Peru"))
 
-names(df)<-c("Name", "Age", "Gender","Country" )
-print(df)
+df1=data.frame(
+  "Name"=c("a","b","c","d"),
+  "Age"=c(12,34,23,67),
+  "BMI"=c(22,12,10,11),
+  "Country"=c("Malaysia","India","Spain","England"))
+print(df1)
 
-df$BMI <- c(15, 20, 30, 10, 9, 39, 26, 14, 21, 12)
-df
-
-subconjunto <- subset(df, Age > 20 & BMI < 15)
+subconjunto <- subset(df1, Age > 20 & BMI < 15)
 print(subconjunto)
 
 ```
@@ -169,6 +165,6 @@ print(subconjunto)
 Calcula la media de la columna Age del df de la Q2. Imprime el resultado.
 
 ```{r}
-mean(df$Age)
+mean(df1$Age)
 ```
 
