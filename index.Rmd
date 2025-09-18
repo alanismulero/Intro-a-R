@@ -12,7 +12,7 @@ output:
 <div style="text-align: center;">
 
 ```{r, echo = F, out.width="50%"}
-knitr::include_graphics("~/Downloads/Clase de R/IMG_3189.HEIC")
+knitr::include_graphics("~/Documents/Clase de R/IMG_3189.HEIC")
 ```
 </div>
 ## Sobre Mi
@@ -32,6 +32,7 @@ knitr::include_graphics("https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExODh1a
 ### R Tutorials
 - [Tarea 1](R Tutorials/R-_Tutorial1.html)
 - [Tarea 2](R Tutorials/R-Tutorial-2.html)
+- [Tarea 3](R Tutoreials/R-_Tutorials3.html)
 <br>
 <br>
 <div style="text-align: center;">
