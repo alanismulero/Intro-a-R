@@ -16,4 +16,100 @@ output:
 - Para preguntas sobre opciones de chunks, experimenta con ellas y escribe tus observaciones.)
 - Entrega la tarea en tus páginas personales usando el archivo HTML generado/kniteado desde el .Rmd. No copies capturas de pantalla del resultado a menos que se indique.
 
+Instalar los paquetes necesarios (solo ejecutar una vez si no están instalados).
+
+```{r}
+# install.packages('gapminder')
+# install.packages('dplyr')
+library(dplyr)
+library(gapminder)
+
+data(gapminder)
+head(gapminder)
+```
+<br>
+
+### Pregunta 1 
+¿Qué clase es el dataset gapminder?
+
+```{r}
+class('gapminder')
+```
+
+### Pregunta 2
+Filtrar una sección de gapminder con esperanza de vida menor a 29.
+
+```{r}
+gapminder %>% 
+  filter(lifeExp < 29)
+```
+
+### Pregunta 3 
+Filtrar el dataset para el país Ruanda y para años mayores a 1979.
+
+```{r}
+gapminder %>% 
+  filter(country == 'Rwanda', year > 1979)
+```
+
+### Pregunta 4
+Crear un nuevo dataset a partir de gapminder excluyendo la columna gdpPercap.
+
+```{r}
+gapminder %>% 
+  select(-gdpPercap)
+
+```
+
+### Pregunta 5
+Ordenar el dataset en orden ascendente según lifeExp.
+
+```{r}
+gapminder %>% 
+  arrange(lifeExp)
+```
+
+### Pregunta 6
+Ordenar el dataset en orden descendente según lifeExp.
+
+```{r}
+gapminder %>% 
+  arrange(desc(lifeExp))
+```
+
+### Pregunta 7
+Crear un nuevo dataset con solo las columnas year y lifeExp.
+
+```{r}
+gapminder %>% 
+  select(year, lifeExp)
+```
+
+### Pregunta 8
+Filtrar el dataset para el país Camboya y mostrar únicamente las columnas year y lifeExp.
+
+```{r}
+gapminder %>% 
+  filter(country == 'Cambodia') %>% 
+  select(year, lifeExp)
+```
+
+### Pregunta 9
+Seleccionar únicamente los países que están en África.
+
+```{r}
+gapminder %>% 
+  filter(continent == 'Africa')
+```
+
+### Pregunta 10
+Crear una nueva columna llamada lifeExp_months que muestre la esperanza de vida en meses.
+
+```{r}
+new_gapminder <- gapminder %>% 
+  mutate(lifeExp_months = lifeExp * 12)
+
+new_gapminder %>%
+  select(lifeExp_months, lifeExp, everything())
+```
 

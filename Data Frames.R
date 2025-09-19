@@ -130,5 +130,5 @@ starwars %>%
 
 # Sample-Al azar ----------------------------------------------------------
 
-starwars %>% 
+starwasr_new <- starwars %>% 
   sample_n(10)
