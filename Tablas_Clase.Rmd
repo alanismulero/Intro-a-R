@@ -1,0 +1,87 @@
+---
+title: "Tablas"
+author: "Alanis S. Mulero Burgos"
+date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
+output: 
+ prettydoc::html_pretty:
+   theme: architect
+   highlight: github
+---
+
+```{r, echo=F, warning=F, message=F}
+# force=T obliga a R a instalar el paquete
+# instale los programas en un R script
+# install.packages('knitr')
+# install.packages("gt")
+# install.packages("kableExtra")
+# install.packages("gaawr2")
+library(gaawr2)
+library(dplyr)
+library(kableExtra)
+library(knitr)
+library(gt)
+data(diabetes)
+head(diabetes)
+```
+
+
+```{r, echo = F}
+# booktab es para que se vea formato journal
+kable(head(diabetes, 5), booktabs = T) %>% 
+  kable_styling(font_size = 12)
+
+```
+
+```{r}
+kable(head(diabetes, 5), booktabs = T) %>% 
+  kable_styling(font_size = 12) %>% 
+  kable_styling(bootstrap_options = "striped", 
+full_width = F)
+
+```
+
+```{r}
+# Anidado 
+kable(head(diabetes, 5), booktabs = T) %>% 
+  kable_styling(font_size = 12,
+                bootstrap_options = "striped", 
+full_width = F)
+```
+
+```{r}
+kable(head(diabetes[1:2], 5), booktabs = T) %>% 
+  kable_styling(font_size = 12,
+                bootstrap_options = "striped", 
+full_width = F)
+```
+
+```{r}
+kable(head(diabetes[1:2, 4:5]), booktabs = T) %>% 
+  kable_styling(font_size = 12,
+                bootstrap_options = "striped", 
+full_width = F)
+```
+
+```{r}
+kable(head(diabetes[1:2], 5), booktabs = T) %>% 
+  kable_styling(font_size = 12, position = "center",
+                bootstrap_options = "striped", 
+full_width = F)
+```
+
+```{r}
+kable(head(diabetes, 5), booktabs = T) %>% 
+  kable_styling(font_size = 12,
+                bootstrap_options = "striped", 
+full_width = F) %>% 
+  add_header_above(c("Personal data" = 4, "Blood Profile" = 8, "Weight" = 2))
+```
+
+```{r}
+kable(diabetes, digits =2, format = "html", row.names = T) %>% 
+  kable_styling(font_size = 15,
+                bootstrap_options = "striped", 
+                full_width = T) %>% 
+  scroll_box(height = "300px")
+```
+
