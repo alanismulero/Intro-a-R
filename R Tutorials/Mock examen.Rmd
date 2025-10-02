@@ -7,6 +7,7 @@ output:
    theme: architect
    highlight: github
 ---
+## Parte 1: Base R
 
 ### Librerias
 ```{r message=F}
@@ -49,5 +50,31 @@ mean(cereal$calories)
 Count how many cereals have fiber greater than or equal to 2 grams
 ```{r}
 length(cereal$fiber [cereal$fiber >= 2])
+```
+
+## Parte 2: dplyr
+
+```{r}
+library(dplyr)
+library(readxl)
+articles <- read.csv("EquationCitations.csv")
+head(articles)
+```
+
+### Pregunta 1
+On average, how many equations per article are published in each journal? (Hint: use group_by() and summarise())
+```{r}
+articles %>% 
+  group_by(journal) %>% 
+    summarize (average_eq = mean(equations))
+```
+
+### Pregunta 2
+For each journal, calculate the average proportion of theoretical citations relative to total citations. (Hint: create a new column with mutate(theo_ratio = theocites / cites), then group_by() and summarise())
+```{r}
+articles %>% 
+  mutate(theo_ratio = theocites/cites) %>% 
+  group_by(journal) %>%
+    summarize (mean_theo = mean(theo_ratio))
 ```
 
