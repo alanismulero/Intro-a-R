@@ -1,0 +1,9 @@
+---
+title: "Midterm"
+author: "Alanis S. Mulero Burgos"
+date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
+output:  
+  prettydoc::html_pretty:
+   theme: architect
+   highlight: github
+---
