@@ -67,4 +67,4 @@ lizards %>%
   summarise(mean_opalinus = mean(opalinus, na.rm = T)) %>% 
   arrange(desc(mean_opalinus))
 ```
-En el mediodía hay mayor promedio de opalinus.
+- Al mediodía hay mayor promedio de opalinus.
