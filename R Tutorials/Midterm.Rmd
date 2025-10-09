@@ -13,6 +13,7 @@ library(dplyr)
 library(aod)
 ```
 
+## Datos
 ```{r}
 msleep <- glimpse(msleep)
 storms <- storms
