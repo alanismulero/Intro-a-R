@@ -12,6 +12,13 @@ library(tidyverse)
 library(dplyr)
 library(aod)
 ```
+## Instrucciones
+- Este es el examen parcial. Cada pregunta vale 20 puntos.
+- Debe escoger 5 de las 6 preguntas para contestar. Su puntaje máximo será 100 puntos.
+- Es altamente recomendado que todos los resultados, incluidas las tablas y salidas, sean siempre visibles en su documento de R Markdown.
+- El examen se debe realizar y entregar durante el tiempo de clase, es decir, jueves 9 de octubre, de 3 a 6 pm.
+- Utilice R y los paquetes tidyverse para contestar todas las preguntas.
+- Trabaje de manera independiente y asegúrese de que su código sea reproducible.
 
 ## Datos
 ```{r}
