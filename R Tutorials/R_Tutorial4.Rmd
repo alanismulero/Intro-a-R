@@ -1,0 +1,22 @@
+---
+title: "R Tutorial 4"
+author: "Alanis S. Mulero Burgos"
+date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
+output:
+  prettydoc::html_pretty:
+   theme: architect
+   highlight: github
+---
+# Instrucciones
+- Esta tarea consiste en subir un gráfico y un párrafo breve (~250 palabras) resumiendo tus hallazgos.
+- En tu párrafo, incluye el contexto de los datos, qué hiciste, cómo lo hiciste y qué encontraste.
+- Entrega el archivo HTML generado/kniteado desde el .Rmd. No envíes capturas de pantalla a menos que se indique.
+- Tu párrafo debe resumir brevemente tu flujo de trabajo y hallazgos. Por ejemplo: Analicé los datos del desempeño de los neumáticos. Los visualicé usando ggplot() y luego ejecutamos un ANOVA de una vía. Verificamos la normalidad de los residuos y encontramos que los residuos estaban aproximadamente distribuidos normalmente. Ejecuté la prueba post-hoc de Tukey. Encontré que los neumáticos de alto desempeño fueron la marca X y los de menor desempeño fueron las marcas Y y Z.
+
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/alanismulero/Library/CloudStorage/OneDrive-UniversityofPuertoRico/Clase de R/Intro a R/R Tutorials/plot1.png")
+```
+</div>
+
+parrafo
+
