@@ -35,6 +35,7 @@ knitr::include_graphics("https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExODh1a
 - [Tarea 3](R Tutorials/R_Tutorials3.html)
 - [Mock Examen 1 & 2](R Tutorials/Mock-examen.html)
 - [Midterm](R Tutorials/Midterm.html)
+- [Tarea 4](R Tutorials/R_Tutorial4.html)
 <br>
 <br>
 <div style="text-align: center;">
