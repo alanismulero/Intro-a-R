@@ -12,7 +12,7 @@ output:
 <div style="text-align: center;">
 
 ```{r, echo = F, out.width="50%"}
-knitr::include_graphics("~/Documents/Clase de R/IMG_3189.HEIC")
+knitr::include_graphics("/Users/alanismulero/Library/CloudStorage/OneDrive-UniversityofPuertoRico/Clase de R/Intro a R/IMG_3189.HEIC")
 ```
 </div>
 ## Sobre Mi

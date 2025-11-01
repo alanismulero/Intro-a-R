@@ -18,5 +18,5 @@ knitr::include_graphics("/Users/alanismulero/Library/CloudStorage/OneDrive-Unive
 ```
 </div>
 
-parrafo
+Analicé los datos sobre el desempeño de los neumáticos y los representé gráficamente utilizando ggplot(). Posteriormente, realicé un ANOVA de una vía para evaluar las diferencias entre las marcas. El ANOVA nos mostro que efectivamente existen diferencias significativas ya que obtuve tres asteriscos que representa un valor pequeño. Además, tras comprobar la normalidad de los residuos, observamos que estos se distribuían aproximadamente de forma normal. Finalmente, apliqué la prueba post-hoc de Tukey, mediante la cual se determinó que la marca Falken presentó el mejor desempeño, mientras que las marcas Bridgestone y CEAT mostraron los resultados más bajos.
 
