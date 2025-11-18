@@ -1,0 +1,11 @@
+SampleID	SampleType
+AMRm	Body1
+AMRM_1	Gland
+AMRm_2	Body
+AMRm_2_3	Gland
+AMRm_3	Body
+AMRm_3_5	Gland
+AMRm_4	Body
+AMRm_4_	Gland
+AMRm_5	Body
+AMRm_5_9    Gland
