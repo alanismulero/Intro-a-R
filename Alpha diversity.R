@@ -7,6 +7,7 @@ install.packages("microbiome")
 install.packages("indicspecies")
 install.packages("picante")
 install.packages("ggtree")
+install.packages("tidyverse")
 library(phyloseq)
 library(ggplot2)
 library(vegan)
@@ -39,7 +40,7 @@ library(tidyverse)   # For data manipulation
 
 otu_file <- "toad.opti_mcc.0.03.subsample.shared"
 tax_file <- "toad.opti_mcc.0.03.cons.taxonomy"
-metadata_file <- "hawkm.design"
+metadata_file <- "Rm.txt"
 
 # Read OTU table
 otu_raw <- read.table("toad.opti_mcc.0.03.subsample.shared", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
@@ -55,12 +56,12 @@ otu_mat <- t(otu_mat)
 
 # Create phyloseq OTU table
 otu_tab <- otu_table(otu_mat, taxa_are_rows = TRUE)
-
+otu_tab
 
 
 ```
 
-```{r}
+
 # --- 1. Read the taxonomy file ---
 tax_raw <- read.table("toad.opti_mcc.0.03.cons.taxonomy", 
                       sep = "\t", header = TRUE, stringsAsFactors = FALSE, quote = "")
@@ -97,12 +98,13 @@ tax_tab <- tax_table(as.matrix(taxonomy_mat))
 head(tax_tab)
 
 
-```
 
-```{r}
+
+
 # Read design file (skip header line)
-metadata <- read.table("hawkm.design", header = FALSE, skip = 1, stringsAsFactors = FALSE)
+metadata <- read.table("Cane.toad.txt", header = FALSE, skip = 1, stringsAsFactors = FALSE)
 
+metadata
 # Rename columns
 colnames(metadata) <- c("SampleID", "SampleType")
 
@@ -112,17 +114,94 @@ metadata$SampleID <- NULL
 
 # Create sample_data object
 sample_data_obj <- sample_data(metadata)
-```
 
-```{r}
+sample_data_obj
+
 physeq <- phyloseq(otu_tab, tax_tab, sample_data_obj)
 physeq
 
 physeq_final <- physeq
+# physeq2 <- prune_samples(c("AMRm", "AMRm_1SCR"), physeq)
+
 
 ```
 
 # 4. Data Pre-processing
+
+phyloseq_nocontrol <- subset_samples(physeq_final, SampleType != "Control")
+
+phyloseq_nocontrol <- prune_taxa(taxa_sums(phyloseq_nocontrol) > 0, phyloseq_nocontrol)
+
+print(phyloseq_nocontrol)
+
+# Alpha diversity
+alpha_div <- estimate_richness(phyloseq_nocontrol, 
+                               measures = c("Observed", "Shannon", "Simpson"))
+
+alpha_div$SampleType <- sample_data(phyloseq_nocontrol)$SampleType
+
+ggplot(alpha_div, aes(x = SampleType, y = Observed, fill = SampleType)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.1, alpha = 0.7) +
+  labs( x = "Sample Type",
+       y = "Number of Observed OTUs") +
+  theme_minimal() + theme(legend.position = "none") + 
+  theme( axis.text.x  = element_text(size = 12, vjust = 0.5, color = "black"), 
+        axis.text.y  = element_text(size = 12, vjust = 0.5, color = "black"),
+        axis.title.x = element_text(size = 14, vjust = 0.25, face = "bold", color = "black"),
+        axis.title.y = element_text(size = 14, vjust = 1,    face = "bold", color = "black")) +
+ scale_fill_brewer(palette = "Set2")
+
+ggplot(alpha_div, aes(x = SampleType, y = Shannon, fill = SampleType)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.1, alpha = 0.7) +
+  labs(
+       x = NULL,
+       y = "Shannon Diversity Index") +
+  theme_minimal() + 
+  theme(legend.position = "none") + 
+  theme( axis.text.x  = element_text(size = 12, vjust = 0.5, color = "black"), 
+         axis.text.y  = element_text(size = 12, vjust = 0.5, color = "black"),
+         axis.title.x = element_text(size = 14, vjust = 0.25, face = "bold", color = "black"),
+         axis.title.y = element_text(size = 14, vjust = 1,    face = "bold", color = "black")) +
+  scale_fill_brewer(palette = "Set2")
+
+shannon_test <- wilcox.test(Shannon ~ SampleType, data = alpha_div)
+cat("\nWilcoxon test for Shannon diversity:\n")
+print(shannon_test)
+
+simpson_with_meta <- cbind(simpson_df, sample_data(physeq))
+
+ggplot(simpson_with_meta, aes(x = SampleType, y = Simpson, fill = SampleType)) +
+  geom_boxplot(alpha = 0.8) +
+  geom_jitter(width = 0.1) +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  labs(y = "Simpson Diversity", x = NULL) +
+  theme( axis.text.x  = element_text(size = 12, vjust = 0.5, color = "black"), 
+         axis.text.y  = element_text(size = 12, vjust = 0.5, color = "black"),
+         axis.title.x = element_text(size = 14, vjust = 0.25, face = "bold", color = "black"),
+         axis.title.y = element_text(size = 14, vjust = 1,    face = "bold", color = "black")) +
+  scale_fill_brewer(palette = "Set2")
+
+simpson_df <- estimate_richness(physeq, measures = "Simpson")
+simpson_df
+
+wilcox.test(Simpson ~ SampleType, data = simpson_with_meta)
+
+ggplot(simpson_with_meta,
+       aes(x = SampleType, y = Simpson, fill = SampleType)) +
+  geom_boxplot(alpha = 0.8) +
+  geom_jitter(width = 0.1) +
+  theme_minimal() +
+  labs(y = "Simpson Diversity", x = NULL) +
+  theme(legend.position = "none") + 
+  theme( axis.text.x  = element_text(size = 12, vjust = 0.5, color = "black"), 
+         axis.text.y  = element_text(size = 12, vjust = 0.5, color = "black"),
+         axis.title.x = element_text(size = 14, vjust = 0.25, face = "bold", color = "black"),
+         axis.title.y = element_text(size = 14, vjust = 1,    face = "bold", color = "black")) +
+  scale_fill_brewer(palette = "Set2")
+
 
 Before analysis, it's good practice to filter out the control samples for the main biological comparisons. We will create a separate phyloseq object without the control samples for diversity analysis.
 
@@ -135,13 +214,12 @@ phyloseq_nocontrol <- prune_taxa(taxa_sums(phyloseq_nocontrol) > 0, phyloseq_noc
 
 # Inspect the new phyloseq object
 print(phyloseq_nocontrol)
-```
 
 # 5. Alpha Diversity
 
 Alpha diversity refers to the diversity within a single sample. We will calculate several metrics (Observed OTUs, Shannon, and Simpson) and compare them between the Buccal and Cloaca sample types.
 
-```{r alpha-diversity}
+{r alpha-diversity}
 # Calculate alpha diversity metrics using the 'phyloseq_nocontrol' object
 alpha_div <- estimate_richness(phyloseq_nocontrol, 
                                measures = c("Observed", "Shannon", "Simpson"))
@@ -202,15 +280,17 @@ ggplot(plot_df, aes(x = Sample, y = Abundance, fill = Phylum)) +
   geom_bar(stat = "identity") +
   facet_wrap(~SampleType, scales = "free_x", nrow = 1) +
   labs(
-    title = "Taxonomic Composition by Genus",
+    title = "Taxonomic Composition by Phylum",
     x = "Samples",
     y = "Relative Abundance (%)",
-    fill = "Genus"
+    fill = NULL
   ) +
-  theme_minimal() +
+  theme_minimal() + 
   theme(
     axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
-    strip.text = element_text(face = "bold", size = 12) # Makes "Buccal" and "Cloaca" titles stand out
+    strip.text = element_text(face = "bold", size = 12), # Makes "Buccal" and "Cloaca" titles stand out
+    axis.title.x = element_text(size = 14, vjust = 0.25, face = "bold", color = "black"),
+    axis.title.y = element_text(size = 14, vjust = 1,    face = "bold", color = "black")
   )
 
 ```
@@ -240,6 +320,9 @@ plot_data <- data.frame(
   as(sample_data(physeq_full_rel_abund), "data.frame")
 )
 
+ord <- ordinate(physeq, method = "PCoA", distance = "bray")
+ord$values$Relative_eig
+
 # --- 6. Build the final plot using ggplot() ---
 ggplot(plot_data, aes(x = Axis.1, y = Axis.2, color = SampleType)) +
   geom_point(size = 5, alpha = 0.7) +
@@ -249,10 +332,10 @@ ggplot(plot_data, aes(x = Axis.1, y = Axis.2, color = SampleType)) +
             show.legend = FALSE) +
   theme_minimal() +
   labs(
-    title = "PCoA of All Samples with Colored Labels",
+    
     color = "Sample Type",
-    x = "Axis 1",
-    y = "Axis 2"
+    x = "PCoA 1 (23.67% variance explained)",
+    y = "PCoA 2 (17.31% variance explained)"
   )
 
 ```
@@ -285,13 +368,31 @@ pcoa_ordination <- ordinate(physeq_beta_rel, method = "PCoA", distance = bray_di
 
 plot_ordination(physeq_beta_rel, pcoa_ordination, color = "SampleType") +
   geom_point(size = 4, alpha = 0.8) +
-  stat_ellipse(type = "t", linetype = 2) + # Adds circles around the groups
+  stat_ellipse(type = "t", linetype = 1) + # Adds circles around the groups
   theme_minimal() +
   labs(
     title = "Beta Diversity (PCoA)",
     subtitle = paste("PERMANOVA p-value:", round(permanova_test$`Pr(>F)`[1], 4)),
     color = "Sample Type"
   )
+
+plot_ordination(physeq_beta_rel, pcoa_ordination, color = "SampleType") +
+  geom_point(size = 4, alpha = 0.9) +
+  stat_ellipse(type = "t", linewidth = 1) +
+  theme_minimal(base_size = 14) +
+  labs(
+    
+    subtitle = paste("p =", signif(permanova_test$`Pr(>F)`[1], 3)),
+    x = paste0("PCoA 1 (", round(ord$values$Relative_eig[1] * 100, 1), "%)"),
+    y = paste0("PCoA 2 (", round(ord$values$Relative_eig[2] * 100, 1), "%)"),
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    legend.position = "right",
+    legend.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  ) +
+  scale_color_brewer(palette = "Set2")
 
 ```
 
@@ -313,22 +414,39 @@ library(ggplot2)
 ggplot(psmelt(physeq_top5_rel), aes(x = SampleType, y = Abundance, fill = Genus)) +
   geom_boxplot(alpha = 0.8) +
   geom_jitter(width = 0.1, alpha = 0.5) + # Add individual points
-  facet_wrap(~Genus, scales = "free_y") +
+  facet_wrap(.~Genus, scales = "free_y", ncol = 3) +
+  theme(
+    strip.text = element_text(size = 12),
+    panel.spacing = unit(1.5, "lines") # more space between panels
+  ) +
   theme_minimal() +
   theme(legend.position = "none") + # Hide legend as titles are enough
-  labs(
-    title = "Relative Abundance of Top 5 Genera",
-    x = "Sample Type",
+  labs( x = NULL,
     y = "Relative Abundance"
   )
 
-```
+ggplot(psmelt(physeq_top5_rel), aes(x = SampleType, y = Abundance, fill = Genus)) +
+  geom_boxplot(alpha = 0.8) +
+  geom_jitter(width = 0.1, alpha = 0.5) +
+  facet_wrap(. ~ Genus, scales = "free_y", ncol = 3) +   # ← wider panels
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+      
+    panel.spacing = unit(1.2, "lines")                   # ← more spacing
+  ) +
+  labs(
+    x = NULL,
+    y = "Relative Abundance"
+  )
+
+
 
 ```{r}
 # First, you might need to install DESeq2. It's from Bioconductor.
 # if(!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
-# BiocManager::install("DESeq2")
-
+ BiocManager::install("DESeq2")
+a
 library(DESeq2)
 
 # 1. Convert your phyloseq object to a DESeq2 object
@@ -343,7 +461,7 @@ deseq_obj <- DESeq(deseq_obj)
 
 # 3. Get the results table
 #    We specify the comparison we want: Buccal vs. Cloaca.
-res <- results(deseq_obj, contrast = c("SampleType", "Buccal", "Cloaca"))
+res <- results(deseq_obj, contrast = c("SampleType", "Body", "Gland"))
 
 # 4. Filter for only the significant results
 #    We're looking for an adjusted p-value (padj) less than 0.05.
@@ -803,4 +921,15 @@ table_for_publication$padj <- scales::scientific(table_for_publication$padj, dig
 knitr::kable(table_for_publication, 
              caption = "Genera significantly enriched in either Buccal or Cloaca samples (DESeq2, padj < 0.05). The log2FoldChange indicates the magnitude of difference, with positive values indicating enrichment in Buccal samples and negative values indicating enrichment in Cloaca samples.")
 print(table_for_publication)
+
+git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+  
+  git commit --amend --reset-author
+
+4 files changed, 817 insertions(+)
+create mode 100644 Alpha diversity.R
+create mode 100644 Cane.toad.txt
+mode change 100644 => 100755 Data Frames.R
 ```
