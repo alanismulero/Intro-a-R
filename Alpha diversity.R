@@ -1,4 +1,4 @@
-```{r setup, include=FALSE}
+
 install.packages("phyloseq")
 install.packages("vegan")
 install.packages("DESeq2")
