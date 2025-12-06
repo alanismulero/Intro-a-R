@@ -13,9 +13,7 @@ output:
 - Les estoy dando el inicial, lo básico para construir un ggplot de Tumor Size vs Type of Breast Surgery.
 - Sigan cuidadosamente la sintaxis de R e incluyan todos los gráficos solicitados en la asignación.
 
-### Libraries
-
-```{r, echo=F, warning= FALSE}
+```{r, echo=F, warning=F, message=F}
 library(ggplot2)
 library(dplyr)
 library(janitor)
@@ -30,7 +28,7 @@ head(metabric[, 1:5])
 ```
 
 ### Plot
-```{r}
+```{r, warning = F}
 ggplot(metabric, aes(x = type_of_breast_surgery,
                      y = tumor_size)) +
   geom_boxplot()
@@ -39,11 +37,11 @@ ggplot(metabric, aes(x = type_of_breast_surgery,
 
 ### Plot nuevo
 
-```{r}
+```{r, warning=F}
 ggplot(metabric, aes(x = type_of_breast_surgery,
-                     y = tumor_size)) +
+                     y = tumor_size,
+                     fill = type_of_breast_surgery)) +
   geom_boxplot() +
-   geom_jitter(width = 0.1, alpha = 0.7) +
   labs( x = "Breast Surgery",
        y = "Tumor Size") +
   theme_minimal() + theme(legend.position = "none") + 
@@ -53,3 +51,5 @@ ggplot(metabric, aes(x = type_of_breast_surgery,
         axis.title.y = element_text(size = 14, vjust = 1,    face = "bold", color = "black")) 
 ```
 
+<div style="text-align: justify;">
+Decidí añadirle color con fill=, le quite la leyenda, cambié los nombres de los ejes y ajuste el tamaño y grosor de las letras. Me parece que se ve mucho mejor para publicar o para un poster. 
