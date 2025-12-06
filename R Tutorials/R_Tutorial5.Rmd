@@ -1,19 +1,55 @@
 ---
 title: "R Tutorialo 5"
-output: html_document
-date: "2025-12-06"
+author: "Alanis S. Mulero Burgos"
+date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
+output: 
+  prettydoc::html_pretty:
+   theme: architect
+   highlight: github
 ---
-## Instrucciones
+# Instrucciones
 - Asegúrense de que todo el código en R sea visible en el documento que entreguen. Necesito poder ver el código de todos los ggplots que hagan.
 - Estaremos usando datos del artículo: Curtis et al., 2012, Genomic and Transcriptomic Architecture of Breast Tumor.
 - Les estoy dando el inicial, lo básico para construir un ggplot de Tumor Size vs Type of Breast Surgery.
 - Sigan cuidadosamente la sintaxis de R e incluyan todos los gráficos solicitados en la asignación.
 
+### Libraries
 
-### Librerías
-```{r}
-library(readr)
+```{r, echo=F, warning= FALSE}
 library(ggplot2)
+library(dplyr)
 library(janitor)
+```
+
+### Load data
+```{r}
+metabric <- read.csv("brca_metabric_clinical_data.csv") %>%
+  clean_names()
+
+head(metabric[, 1:5]) 
+```
+
+### Plot
+```{r}
+ggplot(metabric, aes(x = type_of_breast_surgery,
+                     y = tumor_size)) +
+  geom_boxplot()
+
+```
+
+### Plot nuevo
+
+```{r}
+ggplot(metabric, aes(x = type_of_breast_surgery,
+                     y = tumor_size)) +
+  geom_boxplot() +
+   geom_jitter(width = 0.1, alpha = 0.7) +
+  labs( x = "Breast Surgery",
+       y = "Tumor Size") +
+  theme_minimal() + theme(legend.position = "none") + 
+  theme( axis.text.x  = element_text(size = 12, vjust = 0.5, color = "black"), 
+        axis.text.y  = element_text(size = 12, vjust = 0.5, color = "black"),
+        axis.title.x = element_text(size = 14, vjust = 0.25, face = "bold", color = "black"),
+        axis.title.y = element_text(size = 14, vjust = 1,    face = "bold", color = "black")) 
 ```
 
