@@ -9,51 +9,96 @@ output:
 ---
 # Instrucciones
 
-- 
+- Este es el examen parcial. Cada pregunta vale 20 puntos.
+- Debe escoger 5 de las 6 preguntas para contestar. Su puntaje máximo será 100 puntos.
+- El examen se debe realizar y entregar durante el tiempo de clase, es decir, Martes 16 de diciembre, de 3 a 5 pm.
+- Utilice R y los paquetes tidyverse para contestar todas las preguntas.
+- Trabaje de manera independiente y asegúrese de que su código sea reproducible.
 
+
+## Datos
+```{r, echo=F, warning=F, message=F}
+library(palmerpenguins)
+data(package = 'palmerpenguins')
+head(penguins)
+library(ggplot2)
+library(dplyr)
+penguins <- penguins
+```
 
 
 ## Pregunta 1
-
-```{r}
-
+Crea un gráfico de dispersión usando geom_point() que muestre la relación entre bill_length_mm y bill_depth_mm usando el dataset penguins.
+```{r, warning=F}
+ggplot(penguins, aes(x=  bill_length_mm, y= bill_depth_mm)) +
+  geom_point(size = 3, shape = 19) 
 ```
 
 ## Pregunta 2
-
-```{r}
-
+Partiendo del gráfico anterior y usando un código similar, modifica el gráfico de dispersión para colorear los puntos por species.
+```{r, warning=F}
+ggplot(penguins, aes(x=  bill_length_mm, y= bill_depth_mm, color =species)) +
+  geom_point(size = 3, shape = 19) 
 ```
 
 ## Pregunta 3
-
-```{r}
-
-
-```
-
-## Pregunta 3
-
-```{r}
+Partiendo del gráfico anterior y usando un código similar, modifica el gráfico de dispersión para crear paneles separados por species.
+```{r, warning=F}
+ggplot(penguins, aes(x=  bill_length_mm, y= bill_depth_mm, color =species)) +
+  geom_point(size = 3, shape = 19) +
+  facet_wrap(~ species)
 
 ```
 
 ## Pregunta 4
-
-```{r}
-
+Partiendo del gráfico anterior y usando un código similar, añade una línea de suavizado para cada especie.
+```{r, warning= F, message=F}
+ggplot(penguins, aes(x=  bill_length_mm, y= bill_depth_mm, color =species)) +
+  geom_point(size = 3, shape = 19) +
+  facet_wrap(~ species) +
+  geom_smooth(method = "lm", se = FALSE)
 ```
 
 ## Pregunta 5
-
-```{r}
-
+Partiendo del gráfico que creaste en la Pregunta 1, modifícalo para que sea apto para publicación mejorando al menos tres aspectos.
+```{r, warning=F, message=F}
+ggplot(penguins, aes(x=  bill_length_mm, y= bill_depth_mm, color =species)) +
+  geom_point(size = 1, shape = 19) +
+   theme_bw() +
+  theme(legend.position = "none") +
+ labs(title = "Penguins Length vs Depth",
+       x = "Bill Length (mm)",
+       y = "Bill Depth (mm)") +
+  facet_wrap(~ species) +
+  geom_smooth(method = "lm",
+              scales="free") +
+  theme(plot.title = element_text(hjust=0.5, face = "bold", size = 16)) +
+   theme(axis.text.x  = element_text(size = 12, vjust = 0.5, color = "black"), 
+        axis.text.y  = element_text(size = 12, vjust = 0.5, color = "black"),
+        axis.title.x = element_text(size = 14, vjust = 0.25, face = "bold", color = "black"),
+        axis.title.y = element_text(size = 14, vjust = 1,    face = "bold", color = "black")) 
+  
 ```
-
 
 ## Pregunta 6
-
+Usando el gráfico de dispersión y el resumen del modelo lineal provistos, examina la relación entre flipper_length_mm y body_mass_g en penguins.
 ```{r}
-
+mod <- lm(body_mass_g ~ flipper_length_mm, data =
+            penguins)
+summary(mod)
 ```
 
+1. ¿Cuál es el valor de R-cuadrado del modelo?
+0.7583 
+
+2. ¿Cuál es el p-valor del coeficiente de la pendiente?
+ < 2.2e-16
+ 
+ 3. Basado en el p-valor, ¿hay una relación entre longitud de aletas y masa corporal?
+Sí, hay una relación
+
+4. ¿Cuál es el intercepto?
+-5780.831
+  
+5. ¿Cuál es la pendiente?
+49.686 
