@@ -1,10 +1,11 @@
-AMRm Body
+SampleID   SampleType
+AMRm       Body
 AMRm_10SCR Gland
-AMRm_6SCR Body
+AMRm_6SCR  Body
 AMRm_6SCR_3 Gland
-AMRm_7SCR Body
+AMRm_7SCR  Body
 AMRm_7SCR_5 Gland
-AMRm_8SCR Body
+AMRm_8SCR  Body
 AMRm_8SCR_7 Gland
-AMRm_9SCR Body
+AMRm_9SCR  Body
 AMRm_9SCR_9 Gland

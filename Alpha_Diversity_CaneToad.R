@@ -24,6 +24,11 @@ library(ggtree)
 install.packages("BiocManager")
 
 BiocManager::install("microbiome")
+BiocManager::install("phyloseq")
+BiocManager::install("ggtree")
+
+BiocManager::install(ask = FALSE)
+
 
 a
 # import files
@@ -37,12 +42,12 @@ library(phyloseq)
 library(microbiome)  # Optional, for further analysis
 library(tidyverse)   # For data manipulation
 
-otu_file <- "toad.opti_mcc.0.03.subsample.shared"
-tax_file <- "toad.opti_mcc.0.03.cons.taxonomy"
-metadata_file <- "Rm.txt"
+otu_file <- "rm.opti_mcc.0.03.subsample.shared"
+tax_file <- "rm.opti_mcc.0.03.cons.taxonomy"
+metadata_file <- "Cane.txt"
 
 # Read OTU table
-otu_raw <- read.table("toad.opti_mcc.0.03.subsample.shared", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+otu_raw <- read.table("rm.opti_mcc.0.03.subsample.shared", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
 
 # Remove metadata columns
 otu_mat <- otu_raw[, -(1:3)]  # removes label, Group, numOtus
@@ -62,7 +67,7 @@ otu_tab
 
 
 # --- 1. Read the taxonomy file ---
-tax_raw <- read.table("toad.opti_mcc.0.03.cons.taxonomy", 
+tax_raw <- read.table("rm.opti_mcc.0.03.cons.taxonomy", 
                       sep = "\t", header = TRUE, stringsAsFactors = FALSE, quote = "")
 
 # --- 2. Extract taxonomy strings and OTU IDs ---
@@ -101,7 +106,7 @@ head(tax_tab)
 
 
 # Read design file (skip header line)
-metadata <- read.table("Cane.toad.txt", header = FALSE, skip = 1, stringsAsFactors = FALSE)
+metadata <- read.table("Cane.txt", header = FALSE, skip = 1, stringsAsFactors = FALSE)
 
 metadata
 # Rename columns
