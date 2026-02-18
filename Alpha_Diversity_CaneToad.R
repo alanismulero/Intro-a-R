@@ -174,6 +174,12 @@ shannon_test <- wilcox.test(Shannon ~ SampleType, data = alpha_div)
 cat("\nWilcoxon test for Shannon diversity:\n")
 print(shannon_test)
 
+simpson_values <- estimate_richness(physeq, measures = "Simpson")
+simpson_df <- data.frame(
+  SampleID = rownames(simpson_values),
+  Simpson = simpson_values$Simpson
+)
+
 simpson_with_meta <- cbind(simpson_df, sample_data(physeq))
 
 ggplot(simpson_with_meta, aes(x = SampleType, y = Simpson, fill = SampleType)) +
@@ -444,7 +450,7 @@ ggplot(psmelt(physeq_top5_rel), aes(x = SampleType, y = Abundance, fill = Genus)
     y = "Relative Abundance"
   )
 
-
+# Done 
 
 ```{r}
 # First, you might need to install DESeq2. It's from Bioconductor.
