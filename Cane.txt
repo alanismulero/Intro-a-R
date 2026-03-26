@@ -1,5 +1,15 @@
 SampleID   SampleType
-AMRm       Body
+AMRm	   Body
+AMRM_1	   Gland
+AMRm_2	   Body
+AMRm_2_3   Gland
+AMRm_3	   Body
+AMRm_3_5   Gland
+AMRm_4	   Body
+AMRm_4_7   Gland
+AMRm_5	   Body
+AMRm_5_9   Gland
+AMRm1      Body
 AMRm_10SCR Gland
 AMRm_6SCR  Body
 AMRm_6SCR_3 Gland
