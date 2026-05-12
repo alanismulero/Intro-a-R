@@ -122,103 +122,186 @@ otu_combined <- rbind(otu1_aligned, otu2_aligned)
 dim(otu_combined)
 head(otu_combined[,1:10])
 
+write.csv(otu_combined, file = "otu_combined.csv", row.names = FALSE)
 
+# ============================================================
+# Merge two mothur taxonomy files: toad + RM
+# ============================================================
 
-otu_file <- "rm.opti_mcc.0.03.subsample.shared"
-tax_file <- "rm.opti_mcc.0.03.cons.taxonomy"
+# -----------------------------
+# 1. Load both taxonomy files
+# -----------------------------
+toad_raw <- read.table("toad.opti_mcc.0.03.cons.taxonomy",
+                       header = TRUE, sep = "\t",
+                       stringsAsFactors = FALSE, check.names = FALSE)
+
+rm_raw <- read.table("rm.opti_mcc.0.03.cons.taxonomy",
+                     header = TRUE, sep = "\t",
+                     stringsAsFactors = FALSE, check.names = FALSE)
+
+# -----------------------------
+# 2. Add a Dataset label column
+# -----------------------------
+toad_raw$Dataset <- "Toad"
+rm_raw$Dataset   <- "RM"
+
+# -----------------------------
+# 3. Merge (full outer join on OTU)
+#    Keeps all OTUs from both datasets.
+#    OTUs present in only one dataset will have NA for Size/Taxonomy
+#    in the other — the Dataset column tells you which file it came from.
+# -----------------------------
+tax_combined <- merge(toad_raw, rm_raw,
+                      by = "OTU",
+                      all = TRUE,
+                      suffixes = c("_Toad", "_RM"))
+
+# -----------------------------
+# 4. (Optional) Simple row-bind instead
+#    Uncomment this block and comment out step 3 if you just want
+#    all rows stacked with a Dataset label rather than side-by-side.
+# -----------------------------
+# tax_combined <- rbind(toad_raw, rm_raw)
+
+# -----------------------------
+# 5. Inspect the result
+# -----------------------------
+cat("Dimensions of merged table:", dim(tax_combined), "\n")
+cat("Column names:", colnames(tax_combined), "\n\n")
+head(tax_combined)
+
+# -----------------------------
+# 6. Save to file
+# -----------------------------
+write.table(tax_combined,
+            file = "tax_combined.tsv",
+            sep = "\t",
+            row.names = FALSE,
+            quote = FALSE)
+
+cat("\nDone! Saved to tax_combined.tsv\n")
+
+write.csv(tax_combined, file = "tax_combined.csv", row.names = FALSE)
+
+otu_file <- "otu_combined.csv"
+tax_file <- "tax_combined.csv"
 metadata_file <- "Cane.txt"
 
-# Read OTU table
-otu_raw <- read.table("rm.opti_mcc.0.03.subsample.shared", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
-
-# Remove metadata columns
-otu_mat <- otu_raw[, -(1:3)]  # removes label, Group, numOtus
-
-# Set rownames as sample IDs
-rownames(otu_mat) <- otu_raw$Group
-
-# Transpose so OTUs are rows
-otu_mat <- t(otu_mat)
-
-# Create phyloseq OTU table
-otu_tab <- otu_table(otu_mat, taxa_are_rows = TRUE)
-otu_tab
+library(phyloseq)
 
 
-```
+library(phyloseq)
 
+# ============================================================
+# STEP 1 — Load metadata with robust parsing
+# ============================================================
 
-# --- 1. Read the taxonomy file ---
-tax_raw <- read.table("rm.opti_mcc.0.03.cons.taxonomy", 
-                      sep = "\t", header = TRUE, stringsAsFactors = FALSE, quote = "")
+# Read raw lines and fix inconsistent delimiters
+raw_lines <- readLines("Cane.txt")
+raw_lines <- raw_lines[nchar(trimws(raw_lines)) > 0]  # remove blank lines
 
-# --- 2. Extract taxonomy strings and OTU IDs ---
-taxonomy_strings <- tax_raw$Taxonomy
-names(taxonomy_strings) <- tax_raw$OTU
-
-# --- 3. Split taxonomy strings by ';' and clean ---
-taxonomy_clean <- strsplit(taxonomy_strings, ";")
-
-taxonomy_clean <- lapply(taxonomy_clean, function(x) {
-  x <- x[nchar(x) > 0]                # Remove empty strings
-  x <- gsub("\\(.*?\\)", "", x)       # Remove confidence scores in parentheses
-  x <- gsub('\\"', '', x)              # Remove escaped quotes
-  trimws(x)                           # Trim whitespace
+# Split each line on ANY whitespace run, take first 2 fields only
+parsed <- lapply(raw_lines, function(x) {
+  strsplit(trimws(x), "\\s+")[[1]][1:2]
 })
 
-# --- 4. Pad each taxonomy vector to length 7 (Kingdom to Species) ---
-max_ranks <- 7
+# Build data frame
+meta_df <- as.data.frame(do.call(rbind, parsed[-1]),  # skip header row
+                         stringsAsFactors = FALSE)
+colnames(meta_df) <- parsed[[1]]  # use header as column names
+
+# Verify parsing worked correctly — print to check
+cat("=== Metadata after parsing ===\n")
+print(meta_df)
+
+rownames(meta_df) <- meta_df$SampleID
+meta_df$SampleID  <- NULL
+
+# ============================================================
+# STEP 2 — Load OTU table
+# ============================================================
+otu_raw <- read.csv("otu_combined.csv",
+                    header = TRUE,
+                    stringsAsFactors = FALSE,
+                    check.names = FALSE)
+
+dataset_labels <- otu_raw$Dataset
+otu_raw        <- otu_raw[, !colnames(otu_raw) %in% "Dataset"]
+
+# Confirm row counts match before assigning names
+cat("\nOTU rows:", nrow(otu_raw), " | Metadata rows:", nrow(meta_df), "\n")
+stopifnot(nrow(otu_raw) == nrow(meta_df))
+
+rownames(otu_raw) <- rownames(meta_df)
+
+otu_mat <- t(as.matrix(otu_raw))
+storage.mode(otu_mat) <- "numeric"
+otu_tab <- otu_table(otu_mat, taxa_are_rows = TRUE)
+
+# ============================================================
+# STEP 3 — Load taxonomy table
+# ============================================================
+tax_raw <- read.csv("tax_combined.csv",
+                    header = TRUE,
+                    stringsAsFactors = FALSE,
+                    check.names = FALSE)
+
+taxonomy_strings <- ifelse(
+  !is.na(tax_raw$Taxonomy_Toad) & tax_raw$Taxonomy_Toad != "",
+  tax_raw$Taxonomy_Toad,
+  tax_raw$Taxonomy_RM
+)
+names(taxonomy_strings) <- tax_raw$OTU
+
+taxonomy_clean <- strsplit(taxonomy_strings, ";")
+taxonomy_clean <- lapply(taxonomy_clean, function(x) {
+  x <- x[nchar(x) > 0]
+  x <- gsub("\\(.*?\\)", "", x)
+  x <- gsub('"', '', x)
+  trimws(x)
+})
+
 taxonomy_mat <- do.call(rbind, lapply(taxonomy_clean, function(x) {
-  length(x) <- max_ranks  # pad with NAs if needed
+  length(x) <- 7
   x
 }))
-
-# --- 5. Assign column and row names ---
-colnames(taxonomy_mat) <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+colnames(taxonomy_mat) <- c("Kingdom", "Phylum", "Class", "Order",
+                            "Family", "Genus", "Species")
 rownames(taxonomy_mat) <- names(taxonomy_strings)
 
-# --- 6. Create tax_table object for phyloseq ---
-tax_tab <- tax_table(as.matrix(taxonomy_mat))
+# ============================================================
+# STEP 4 — Match OTUs
+# ============================================================
+shared_otus          <- intersect(taxa_names(otu_tab), rownames(taxonomy_mat))
+taxonomy_mat_matched <- taxonomy_mat[shared_otus, , drop = FALSE]
+tax_tab              <- tax_table(as.matrix(taxonomy_mat_matched))
+otu_tab              <- prune_taxa(shared_otus, otu_tab)
 
-# --- Optional: Check the result ---
-head(tax_tab)
+# ============================================================
+# STEP 5 — Final name check before building phyloseq
+# ============================================================
+cat("\n=== Final name check ===\n")
+cat("OTU sample names:\n");   print(sample_names(otu_tab))
+cat("Metadata sample names:\n"); print(rownames(meta_df))
+cat("Match:", identical(sample_names(otu_tab), rownames(meta_df)), "\n")
 
+sample_data_obj <- sample_data(meta_df)
 
-
-
-
-# Read design file (skip header line)
-metadata <- read.table("Cane.txt", header = FALSE, skip = 1, stringsAsFactors = FALSE)
-
-metadata
-# Rename columns
-colnames(metadata) <- c("SampleID", "SampleType")
-
-# Set rownames
-rownames(metadata) <- metadata$SampleID
-metadata$SampleID <- NULL
-
-# Create sample_data object
-sample_data_obj <- sample_data(metadata)
-
-sample_data_obj
-
+# ============================================================
+# STEP 6 — Build phyloseq
+# ============================================================
 physeq <- phyloseq(otu_tab, tax_tab, sample_data_obj)
-physeq
+print(physeq)
 
-physeq_final <- physeq
-# physeq2 <- prune_samples(c("AMRm", "AMRm_1SCR"), physeq)
-
-
-```
-
-# 4. Data Pre-processing
-
-phyloseq_nocontrol <- subset_samples(physeq_final, SampleType != "Control")
-
-phyloseq_nocontrol <- prune_taxa(taxa_sums(phyloseq_nocontrol) > 0, phyloseq_nocontrol)
-
+phyloseq_nocontrol <- subset_samples(physeq, SampleType != "Control")
+phyloseq_nocontrol <- prune_taxa(taxa_sums(phyloseq_nocontrol) > 0,
+                                 phyloseq_nocontrol)
 print(phyloseq_nocontrol)
+
+
+
+
+
 
 # Alpha diversity
 alpha_div <- estimate_richness(phyloseq_nocontrol, 
